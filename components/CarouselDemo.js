@@ -18,8 +18,13 @@ const Item = styled.div`
   /*
     The following causes entire class swap which causes layout jump
     This is the point where I would like to control it and create a subclass based on p.$active  
+
+    This is the workaround to create subclass
   */
-  z-index: ${(p) => p.$active ? 'auto': -1}; 
+  z-index: -1;
+  &.active {
+    z-index: auto;
+  }
 `;
 
 export const CarouselDemo = ({
@@ -45,7 +50,7 @@ export const CarouselDemo = ({
             key={idx}
 
             $color={item.color}
-            $active={idx === activeIdx}
+            className={idx === activeIdx ? 'active' : undefined}
           />
         );
       })}
